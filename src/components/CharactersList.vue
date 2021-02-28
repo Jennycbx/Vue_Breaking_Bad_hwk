@@ -2,9 +2,7 @@
   <form>
         <select v-on:change="handleSelect" v-model='selectedCharacter'>
             <option disabled value="">Select a character</option>
-            <option v-for='(character, index) in characters' :key='index' :value="character">{{character.name}}
-                <!-- <span v-if='favouriteCharacters.includes(character)'>&#127775;</span> -->
-            </option>
+            <option v-for='(character, index) in characters' :key='index' :value="character">{{character.name}}</option>
         </select>
     </form>
 </template>
@@ -27,10 +25,16 @@ export default {
         }
     },
     components: {
-        // "list-item": ListItem
     }
 }
 </script>
 
 <style>
-
+select {
+    height: 30px;
+    background-color: rgb(245, 2, 2);
+    border-radius: 12px;
+    padding-left: 10px;
+    
+}
+</style>

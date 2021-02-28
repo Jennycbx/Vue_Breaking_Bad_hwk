@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-if='character'>
-        <h2>{{character.name}}</h2>
+        <h2>{{character.name}}
+            <button v-on:click='handleAddClick'>Add to favourites</button>
+        </h2>
         <p>Nickname: {{character.nickname}}</p>
         <p>Occupation: {{character.occupation}}</p>
         <p>Status: {{character.status}}</p>
@@ -10,9 +12,16 @@
 </template>
 
 <script>
+import {eventBus} from '../main.js'
+
 export default {
     name:'character-detail',
-    props: ['character']
+    props: ['character', 'favouriteCharacters'],
+    methods: {
+        handleAddClick() {
+            eventBus.$emit('character-add', this.character)
+        }
+    }
 }
 </script>
 

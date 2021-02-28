@@ -12,5 +12,11 @@ export default {
 </script>
 
 <style>
+li {
 
+    list-style: none;
+    padding: 0;
+    font-weight: 500;
+    
+}
 </style>
