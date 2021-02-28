@@ -27,15 +27,14 @@ export default {
   },
 
   mounted() {
-    this.getCharacters()
-  },
+    fetch("https://breakingbadapi.com/api/characters")
+    .then(res => res.json())
+    .then(characters => this.characters = characters)
 
-  methods: {
-    getCharacters: function(){
-      fetch("https://breakingbadapi.com/api/characters")
-      .then(res => res.json())
-      .then(characters => this.characters = characters)
-    }
+    eventBus.$on('character-selected', (character) => {
+      this.selectedCharacter = character
+    })
+
   }
 }
 </script>
@@ -45,7 +44,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
