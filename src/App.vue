@@ -1,17 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Breaking Bad Characters</h1>
+    <characters-list :characters='characters'></characters-list>
+    <character-detail :character='selectedCharacter'></character-detail>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CharactersList from './components/CharactersList.vue'
+import CharacterDetail from './components/CharacterDetail.vue'
+
+import {eventBus} from './main.js'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      characters: [],
+      selectedCharacter: null
+    }
+  },
+
   components: {
-    HelloWorld
+    'characters-list': CharactersList,
+    'character-detail': CharacterDetail
+  },
+
+  mounted() {
+    this.getCharacters()
+  },
+
+  methods: {
+    getCharacters: function(){
+      fetch("https://breakingbadapi.com/api/characters")
+      .then(res => res.json())
+      .then(characters => this.characters = characters)
+    }
   }
 }
 </script>
